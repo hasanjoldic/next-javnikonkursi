@@ -20,7 +20,7 @@ export default function CompaniesPage() {
   const { jobs } = useAppState();
 
   const [isJobFormSheetOpen, setIsJobFormSheetOpen] = useState(false);
-  const [selectedJobId, setSelectedJobId] = useState<string>();
+  const [selectedJobId] = useState<string>();
 
   const selectedJob = useMemo(() => {
     return jobs.find((job) => job.id === selectedJobId);

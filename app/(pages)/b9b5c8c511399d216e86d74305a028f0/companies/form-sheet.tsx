@@ -3,7 +3,6 @@ import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import {
   Sheet,
   SheetClose,
@@ -13,16 +12,14 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet"
 
-import { ICompany, upsertCompanySchema, upsertJobSchema, type IJob } from "@/app/api"
+import { ICompany, upsertCompanySchema } from "@/app/api"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useUpsertCompany, useUpsertJob } from "@/react-query"
+import { useUpsertCompany } from "@/react-query"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import Combobox from "@/components/combobox"
-import { useAppState } from "@/app/layout.provider"
-import { useEffect, useMemo, useRef } from "react"
+import { useEffect, useRef } from "react"
 import { regions } from "@/data"
-import DatePicker from "@/components/date-picker"
 
 type FormValues = z.infer<typeof upsertCompanySchema>;
 
@@ -54,7 +51,7 @@ export function CompanyFormSheet({ company, onClose }: Props) {
 
   useEffect(() => {
     form.reset(getDefaultValues(company));
-  }, [company]);
+  }, [company, form]);
 
   const formRef = useRef<HTMLFormElement>(null);
 

@@ -1,7 +1,6 @@
 import z from "zod";
 
-import { ERegion, regions, regionValues } from "@/data";
-import { File } from "buffer";
+import { regionValues } from "@/data";
 
 export const upsertJobSchema = z.object({
   id: z.string().uuid().optional(),

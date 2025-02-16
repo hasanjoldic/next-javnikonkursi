@@ -34,7 +34,7 @@ export default function DatePicker({ value, onChange }: Props) {
     if (date?.toISOString() !== valueRef.current) {
       onChange(date?.toISOString().split("T")[0])
     }
-  }, [date])
+  }, [date, onChange])
 
   return (
     <Popover>

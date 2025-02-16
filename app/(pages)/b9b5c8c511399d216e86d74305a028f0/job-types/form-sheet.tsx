@@ -3,7 +3,6 @@ import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import {
   Sheet,
   SheetClose,
@@ -13,16 +12,12 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet"
 
-import { ICompany, IJobType, upsertJobTypeSchema, upsertJobSchema, type IJob } from "@/app/api"
+import { IJobType, upsertJobTypeSchema } from "@/app/api"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useUpsertJob, useUpsertJobType } from "@/react-query"
+import { useUpsertJobType } from "@/react-query"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import Combobox from "@/components/combobox"
-import { useAppState } from "@/app/layout.provider"
-import { useEffect, useMemo, useRef } from "react"
-import { regions } from "@/data"
-import DatePicker from "@/components/date-picker"
+import { useEffect, useRef } from "react"
 
 type FormValues = z.infer<typeof upsertJobTypeSchema>;
 
@@ -53,7 +48,7 @@ export function JobTypeFormSheet({ jobType, onClose }: Props) {
 
   useEffect(() => {
     form.reset(getDefaultValues(jobType));
-  }, [jobType]);
+  }, [jobType, form]);
 
   const formRef = useRef<HTMLFormElement>(null);
 

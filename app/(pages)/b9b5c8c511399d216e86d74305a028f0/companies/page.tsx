@@ -20,7 +20,7 @@ export default function CompaniesPage() {
   const { companies } = useAppState();
 
   const [isCompanyFormSheetOpen, setIsCompanyFormSheetOpen] = useState(false);
-  const [selectedCompanyId, setSelectedCompanyId] = useState<string>();
+  const [selectedCompanyId] = useState<string>();
 
   const selectedCompany = useMemo(() => {
     return companies.find((company) => company.id === selectedCompanyId);

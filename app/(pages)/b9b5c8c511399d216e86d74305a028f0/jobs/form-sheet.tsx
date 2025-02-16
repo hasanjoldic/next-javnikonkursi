@@ -3,7 +3,6 @@ import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import {
   Sheet,
   SheetClose,
@@ -11,7 +10,6 @@ import {
   SheetFooter,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
 } from "@/components/ui/sheet"
 
 import { upsertJobSchema, type IJob } from "@/app/api"
@@ -64,7 +62,7 @@ export function JobFormSheet({ job, onClose }: Props) {
 
   useEffect(() => {
     form.reset(getDefaultValues(job));
-  }, [job]);
+  }, [job, form]);
 
   const formRef = useRef<HTMLFormElement>(null);
 

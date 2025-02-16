@@ -100,43 +100,13 @@ export default function AppStateProvider({
     setFiltersToLs(filters);
   }, []);
 
-  // const filteredJobs = _orderBy(
-  //   // TODO: job type
-  //   jobs.filter((job: any) => {
-  //     if (
-  //       regionsFilter.length &&
-  //       !regionsFilter.map((o) => o.value).includes(job.region)
-  //     ) {
-  //       return false;
-  //     }
-  //     if (
-  //       jobTypesFilter.length &&
-  //       !jobTypesFilter.map((o) => o.value).includes(job.jobType?.id)
-  //     ) {
-  //       return false;
-  //     }
-  //     if (
-  //       companiesFilter.length &&
-  //       !companiesFilter.map((o) => o.value).includes(job.company.id)
-  //     ) {
-  //       return false;
-  //     }
-  //     if (!shouldIncludeExpired && currentDate > job.endDate) {
-  //       return false;
-  //     }
-  //     return true;
-  //   }),
-  //   (job: any) => job._createdAt,
-  //   "desc"
-  // );
-
   const filteredJobs = useMemo(() => {
     if (!jobs) return [];
 
     let filteredJobs = jobs;
 
     if (filters.regions.size) {
-      // @ts-expect-error
+      // @ts-expect-error placeholder
       filteredJobs = filteredJobs.filter((job) => filters.regions.has(job.region));
     }
 

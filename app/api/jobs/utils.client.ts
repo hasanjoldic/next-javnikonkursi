@@ -10,7 +10,7 @@ export const upsertJobClient = async (payload: IUpsertJobRequest) => {
   const formData = new FormData();
 
   for (const key in payload) {
-    // @ts-expect-error
+    // @ts-expect-error placeholder
     formData.append(key, payload[key]);
   }
 
