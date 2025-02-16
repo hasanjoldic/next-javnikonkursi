@@ -1,0 +1,24 @@
+.linearProgress {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  background-color: lightgray;
+  overflow: hidden;
+}
+
+.linearProgressBar {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: hsl(var(--primary));
+  animation: linear-progress-animation 1s infinite linear;
+}
+
+@keyframes linear-progress-animation {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
