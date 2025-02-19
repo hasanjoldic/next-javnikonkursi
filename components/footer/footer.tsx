@@ -105,6 +105,7 @@ export default function Footer() {
           <div className="flex flex-col text-lg font-semibold">
             <span>Kontakt:</span>
             <a href="mailto:joldic.hasan@gmail.com">joldic.hasan@gmail.com</a>
+            <a href="mailto:adelajoldic.ofc@gmail.com">adelajoldic.ofc@gmail.com</a>
           </div>
         </div>
       </div>
