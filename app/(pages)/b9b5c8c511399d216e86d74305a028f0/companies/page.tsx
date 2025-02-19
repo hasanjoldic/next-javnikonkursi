@@ -8,9 +8,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from "@/components/ui/table";
 
-import { useAppState } from "@/app/layout.provider"
+import { useAppState } from "@/app/layout.provider";
 import { Button } from "@/components/ui/button";
 import { PlusIcon } from "lucide-react";
 import { useMemo, useState } from "react";
@@ -20,18 +20,23 @@ export default function CompaniesPage() {
   const { companies } = useAppState();
 
   const [isCompanyFormSheetOpen, setIsCompanyFormSheetOpen] = useState(false);
-  const [selectedCompanyId] = useState<string>();
+  const [selectedCompanyId, setSelectedCompanyId] = useState<string | null>(null);
 
   const selectedCompany = useMemo(() => {
     return companies.find((company) => company.id === selectedCompanyId);
   }, [selectedCompanyId, companies]);
+
+  const handleEditCompany = (companyId: string) => {
+    setSelectedCompanyId(companyId);
+    setIsCompanyFormSheetOpen(true);
+  };
 
   return (
     <>
       <div className="p-4 flex flex-col gap-4">
         <div className="flex justify-between items-center">
           <div className="text-2xl font-medium">Companies</div>
-          <Button onClick={() => setIsCompanyFormSheetOpen(true)}>
+          <Button onClick={() => { setSelectedCompanyId(null); setIsCompanyFormSheetOpen(true); }}>
             <PlusIcon />
             New Company
           </Button>
@@ -50,7 +55,11 @@ export default function CompaniesPage() {
             </TableHeader>
             <TableBody>
               {companies.map((company) => (
-                <TableRow key={company.id}>
+                <TableRow
+                  key={company.id}
+                  onClick={() => handleEditCompany(company.id)}
+                  className="cursor-pointer"
+                >
                   <TableCell className="font-medium">{company.title}</TableCell>
                   <TableCell>{company.region}</TableCell>
                   <TableCell>{company.url}</TableCell>
@@ -70,5 +79,5 @@ export default function CompaniesPage() {
         />
       )}
     </>
-  )
+  );
 }
