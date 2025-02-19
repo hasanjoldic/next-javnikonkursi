@@ -20,18 +20,23 @@ export default function CompaniesPage() {
   const { jobs } = useAppState();
 
   const [isJobFormSheetOpen, setIsJobFormSheetOpen] = useState(false);
-  const [selectedJobId] = useState<string>();
+  const [selectedJobId, setSelectedJobId] = useState<string | null>(null);
 
   const selectedJob = useMemo(() => {
     return jobs.find((job) => job.id === selectedJobId);
   }, [selectedJobId, jobs]);
+
+  const handleEditJob = (jobId: string) => {
+    setSelectedJobId(jobId);
+    setIsJobFormSheetOpen(true);
+  };
 
   return (
     <>
       <div className="p-4 flex flex-col gap-4">
         <div className="flex justify-between items-center">
           <div className="text-2xl font-medium">Jobs</div>
-          <Button onClick={() => setIsJobFormSheetOpen(true)}>
+          <Button onClick={() => { setSelectedJobId(null); setIsJobFormSheetOpen(true); }}>
             <PlusIcon />
             New Job
           </Button>
@@ -53,20 +58,20 @@ export default function CompaniesPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {jobs.map((job) => (
-                <TableRow key={job.id}>
-                  <TableCell className="font-medium">{job.title}</TableCell>
-                  <TableCell>{job.region}</TableCell>
-                  <TableCell>{job.company?.title}</TableCell>
-                  <TableCell>{job.job_type?.title}</TableCell>
-                  <TableCell>{job.number_of_openings}</TableCell>
-                  <TableCell>{job.start_date}</TableCell>
-                  <TableCell>{job.end_date}</TableCell>
-                  <TableCell>{job.created_at.slice(0, 10)}</TableCell>
-                  <TableCell>{job.updated_at.slice(0, 10)}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
+  {jobs.map((job) => (
+    <TableRow key={job.id} onClick={() => handleEditJob(job.id)} className="cursor-pointer">
+      <TableCell className="font-medium">{job.title}</TableCell>
+      <TableCell>{job.region}</TableCell>
+      <TableCell>{job.company?.title}</TableCell>
+      <TableCell>{job.job_type?.title}</TableCell>
+      <TableCell>{job.number_of_openings}</TableCell>
+      <TableCell>{job.start_date}</TableCell>
+      <TableCell>{job.end_date}</TableCell>
+      <TableCell>{job.created_at.slice(0, 10)}</TableCell>
+      <TableCell>{job.updated_at.slice(0, 10)}</TableCell>
+    </TableRow>
+  ))}
+</TableBody>
           </Table>
         </Card>
       </div>
